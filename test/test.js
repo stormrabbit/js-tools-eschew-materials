@@ -2,9 +2,12 @@ const {
   logger,
   fsTools,
   cmdTools,
-  cryptoTools
+  cryptoTools,
+  txtTools
 } = require('../index');
+
 const co = require('co');
+
 
 co(function* () {
   try {
@@ -27,6 +30,12 @@ co(function* () {
     console.log('logger 运行正常')
     // logger.m('test')
     // console.log(exeResult);
+
+    console.log(txtTools.head2LowerCase('FUCKYOU'));
+    console.log(txtTools.head2UpperCase('curseYou'));
+    console.log(txtTools.formatDate(new Date()));
+    // console.log(txtTools.parseURL('http://abc.com:8080/dir/index.html?id=255&m=hello#top'));
+    console.log('txtTools 运行正常')
   } catch (error) {
     console.log('运行错误：', error);
   } finally {
@@ -34,11 +43,3 @@ co(function* () {
   }
 })
 
-// const test1 = {a: 'a', b: 'b', c:'c', d:'d'};
-// console.log('encode==>\n', urlParamsTools.urlParamsEncode(test1));
-// console.log('decode==>:\n', urlParamsTools.urlParamsDecode(urlParamsTools.urlParamsEncode(test1)));
-// logger.setDebugMode(1);
-// logger.setDebugMode(0);
-// logger.i('我去你妹')
-// logger.setDebugMode(1);
-// logger.m('呵呵大');

@@ -36,6 +36,11 @@
 5. `e` console.error
 6. `m` console.log('==>', str) 
 
+- `txtTools` : 字符串处理工具
+
+1. head2LowerCase : 首字母小写
+2. head2UpperCase : 首字母大写
+3. formatDate : 日期转字符串
 >使用需要依赖 co 函数模块。
 
 ### 使用
@@ -58,6 +63,11 @@
 1. 修正由 spell-fs 拷贝代码时忘记修改方法名的错误。
 2. 修改 test 方法，增加所有工具类的检测。
 
+- 1.0.2
+1. 增加了 txtTool 工具类，专门处理字符串进行处理
+
+- 1.0.3
+1. 修复因复制粘贴代码引起的 bug，以后应该加强测试
 #### author
 
 [@龙骑将杨影枫](https://github.com/stormrabbit)
