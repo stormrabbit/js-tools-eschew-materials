@@ -17,11 +17,6 @@
 2. `writeFilePlus` : promise 对象封装的 fs.writeFile
 3. `insertFilePlus` : promise 对象封装后的组合函数，主要用于在文件的某段话之后插入另一段话
 
-- `cmdTools` : 用 promise 对象封装了 exec，方便异步调用
-
-1. `execPlus` : promise 对象封装后的 exec ，可以执行命令行语句并输出
-2. `execCommands` : 使用 `execPlus` 处理多条命令行语句
-
 - `cryptoTools` :  加密以及解密工具
 
 1. `base64encode` : base64 加密 
@@ -68,6 +63,9 @@
 
 - 1.0.3
 1. 修复因复制粘贴代码引起的 bug，以后应该加强测试
+
+- 1.0.4 
+1. cmtTools 有问题，暂时移除
 #### author
 
 [@龙骑将杨影枫](https://github.com/stormrabbit)
