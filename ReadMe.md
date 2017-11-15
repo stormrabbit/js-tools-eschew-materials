@@ -43,6 +43,11 @@
 3. formatDate : 日期转字符串
 >使用需要依赖 co 函数模块。
 
+- `objTools` : 对象数组工具
+
+1. obj2arr 对象转数组
+2. arr2obj 数组转对象
+ 
 ### 使用
 
 - 使用 `npm install eschew-materials --save`
@@ -68,6 +73,9 @@
 
 - 1.0.3
 1. 修复因复制粘贴代码引起的 bug，以后应该加强测试
+
+- 1.0.4
+1. 增加了 objTools 方法，可以使用 obj2arr 对象转数组或者 arr2obj 数组转对象
 #### author
 
 [@龙骑将杨影枫](https://github.com/stormrabbit)

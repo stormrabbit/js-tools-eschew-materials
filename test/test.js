@@ -3,7 +3,8 @@ const {
   fsTools,
   cmdTools,
   cryptoTools,
-  txtTools
+  txtTools,
+  objTools
 } = require('../index');
 
 const co = require('co');
@@ -35,7 +36,20 @@ co(function* () {
     console.log(txtTools.head2UpperCase('curseYou'));
     console.log(txtTools.formatDate(new Date()));
     // console.log(txtTools.parseURL('http://abc.com:8080/dir/index.html?id=255&m=hello#top'));
-    console.log('txtTools 运行正常')
+    console.log('txtTools 运行正常');
+
+    const obj = {
+      a: 'a',
+      b: 'b',
+      c: 'c',
+      d: 'd'
+    };
+    console.log(objTools.obj2arr(obj));
+
+    const arr = [1, {a: 'a'}, ()=>{console.log('helloWorld')}];
+
+    console.log(objTools.arr2obj(arr));
+
   } catch (error) {
     console.log('运行错误：', error);
   } finally {
