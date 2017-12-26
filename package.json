@@ -1,17 +1,21 @@
 {
   "name": "eschew-materials",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "common tools for web developer",
   "main": "index.js",
   "scripts": {
-    "test": "node test/test.js"
+    "test": "node test/test.js",
+    "start": "babel-node test/testes6",
+    "build": "babel src -d libs"
   },
   "keywords": [
     "web",
     "tools"
   ],
   "dependencies": {
-    "co": "^4.6.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1",
     "chalk": "^1.1.3"
   },
   "author": "stormrabbit",

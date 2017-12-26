@@ -1,5 +1,4 @@
-const fs = require('fs');
-const co = require('co');
+import fs from 'fs';
 
 
 /**
@@ -44,8 +43,8 @@ const writeFilePlus = (fileName, filledTxt, isAppend) => {
 const insertFilePlus = (fileName, filledTxt, appendTxt) => {
   return new Promise((reslove, reject) => {
     try {
-      co(function* () {
-        const fileData = yield readFilePlus(fileName);
+      const f = async () => {
+        const fileData = await readFilePlus(fileName);
         let substringIndex = -1;
         if (!!appendTxt && !!appendTxt.length) {
           substringIndex = (fileData.indexOf(appendTxt) === -1) ? -1: fileData.indexOf(appendTxt) + appendTxt.length;
@@ -56,7 +55,8 @@ const insertFilePlus = (fileName, filledTxt, appendTxt) => {
         const rewriteTxt = preTxt + filledTxt + postTxt;
         const result = writeFilePlus(fileName, rewriteTxt);
         reslove(result);
-      });
+      }
+      f();
     } catch (error) {
       reject(error);
     }
@@ -64,5 +64,7 @@ const insertFilePlus = (fileName, filledTxt, appendTxt) => {
   })
 }
 
-module.exports = { readFilePlus, writeFilePlus, insertFilePlus };
+export {
+  readFilePlus, writeFilePlus, insertFilePlus
+}
 

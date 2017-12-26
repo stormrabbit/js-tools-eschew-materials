@@ -50,7 +50,7 @@ const arr2obj = (arr) => {
   }
 }
 
-module.exports = {
+export {
   obj2arr,
   arr2obj
 }

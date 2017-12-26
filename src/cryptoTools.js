@@ -118,4 +118,4 @@ const urlParamsDecode = paramsObjStrEncode =>{
     return JSON.parse(baseStr);
 }
 
-module.exports = {base64decode, base64encode, urlParamsDecode, urlParamsEncode};
+export {base64decode, base64encode, urlParamsDecode, urlParamsEncode};

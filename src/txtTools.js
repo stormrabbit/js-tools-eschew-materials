@@ -92,36 +92,82 @@ const formatDate = (date, fmt = 'yyyy-MM-dd HH:mm:ss.S') => {
  * myURL.source= 'http://abc.com:8080/dir/index.html?id=255&m=hello#top'
  */
 const parseURL = (url) => {
-  console.log('document==>', document);
-  const ae = document.createElement('a');
-  ae.href = url;
-  return {
-    source: url,
-    protocol: ae.protocol.replace(':', ''),
-    host: ae.hostname,
-    port: ae.port,
-    query: ae.search,
-    params: (() => {
-      const ret = {};
-      const seg = ae.search.replace(/^\?/, '').split('&');
-      const len = seg.length;
-      let ii = 0;
-      let ss;
-      for (; ii < len; ii++) {
-        if (!seg[ii]) {
-          continue;
+  // console.log('document==>', document);
+  let hasDocument = true;
+  try {
+    hasDocument = !!document;
+  } catch (error) {
+    console.log('error', error + '');
+    if ((error + '').includes('document is not defined')) {
+      hasDocument = false;
+    }
+  }
+  if ( !!hasDocument ) {
+    const ae = document.createElement('a');
+    ae.href = url;
+    return {
+      source: url,
+      protocol: ae.protocol.replace(':', ''),
+      host: ae.hostname,
+      port: ae.port,
+      query: ae.search,
+      params: (() => {
+        const ret = {};
+        const seg = ae.search.replace(/^\?/, '').split('&');
+        const len = seg.length;
+        let ii = 0;
+        let ss;
+        for (; ii < len; ii++) {
+          if (!seg[ii]) {
+            continue;
+          }
+          ss = seg[ii].split('=');
+          ret[ss[0]] = ss[1];
         }
-        ss = seg[ii].split('=');
-        ret[ss[0]] = ss[1];
-      }
-      return ret;
-    })(),
-    file: (ae.pathname.match(/\/([^\/?#]+)$/i) || [''])[1],
-    hash: ae.hash.replace('#', ''),
-    path: ae.pathname.replace(/^([^\/])/, '/$1'),
-    relative: (ae.href.match(/tps?:\/\/[^\/]+(.+)/) || [''])[1],
-    segments: ae.pathname.replace(/^\//, '').split('/')
-  };
+        return ret;
+      })(),
+      file: (ae.pathname.match(/\/([^\/?#]+)$/i) || [''])[1],
+      hash: ae.hash.replace('#', ''),
+      path: ae.pathname.replace(/^([^\/])/, '/$1'),
+      relative: (ae.href.match(/tps?:\/\/[^\/]+(.+)/) || [''])[1],
+      segments: ae.pathname.replace(/^\//, '').split('/')
+    }; 
+  }else {
+    const hostReg = /(http)?s?(:\/\/)?[a-zA-Z.:0-9]*\//;
+    const host = url.match(hostReg)[0];
+
+    const queryReg = /\?.*/;
+    const query = url.match(queryReg)[0];
+    const uri = url.replace(host, '\/').replace(query, '');
+    return {
+      source: url,
+      host,
+      uri,
+      query,
+      params: (() => {
+        const ret = {};
+        const seg = query.replace(/^\?/, '').split('&');
+        const len = seg.length;
+        let ii = 0;
+        let ss;
+        for (; ii < len; ii++) {
+          if (!seg[ii]) {
+            continue;
+          }
+          ss = seg[ii].split('=');
+          ret[ss[0]] = ss[1];
+        }
+        return ret;
+      })()
+    }
+  }
+
+ 
 }
 
-module.exports = { head2LowerCase, head2UpperCase, formatDate, parseURL }
+export {
+  head2LowerCase,
+  head2UpperCase,
+  formatDate,
+  parseURL
+}
